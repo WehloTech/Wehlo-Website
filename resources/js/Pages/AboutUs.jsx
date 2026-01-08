@@ -302,7 +302,7 @@ export default function AboutUs() {
                         </video>
                         <h1 className="pt-8 text-3xl font-bold">
                             {highlightText(
-                                "1 Pioneering Localized Environmental Monitoring for a Safer Tomorrow",
+                                "Pioneering Localized Environmental Monitoring for a Safer Tomorrow",
                                 searchQuery
                             )}
                         </h1>
