@@ -368,7 +368,7 @@ export default function AboutUs() {
                                         <div className="w-full space-y-3">
                                             <div className="w-full text-2xl font-bold border-b-2">
                                                 {highlightText(
-                                                    "Dr. Francis Aldrine Uy",
+                                                    "Febus Reidj Cruz",
                                                     searchQuery
                                                 )}
                                             </div>
