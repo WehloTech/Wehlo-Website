@@ -302,7 +302,7 @@ export default function AboutUs() {
                         </video>
                         <h1 className="pt-8 text-3xl font-bold">
                             {highlightText(
-                                "Pioneering Localized Environmental Monitoring for a Safer Tomorrow",
+                                "1 Pioneering Localized Environmental Monitoring for a Safer Tomorrow",
                                 searchQuery
                             )}
                         </h1>
@@ -317,7 +317,7 @@ export default function AboutUs() {
                     </div>
                 </motion.section>
                 <div>
-                   
+
                     <motion.section
                         variants={founderBlockVariants}
                         initial="hidden"
