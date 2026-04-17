@@ -48,7 +48,7 @@ export default function CasesDetails({ cases }) {
                                 </span>
                                 <strong>
                                     {new Date(
-                                        cases.created_at
+                                        cases.date_implemented || cases.created_at
                                     ).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "short",

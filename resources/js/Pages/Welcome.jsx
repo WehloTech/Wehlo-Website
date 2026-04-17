@@ -11,7 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import AnimatedButton from "@/components/AnimatedButton";
 import { motion, useAnimation } from "motion/react";
 import { useHighlightQuery } from "@/hooks/useHighlightQuery";
-import BannerCards from "@/components/BannerCards"; // Import BannerCards component
 
 export default function Welcome() {
     const [banners, setBanners] = useState([]);
@@ -27,12 +26,6 @@ export default function Welcome() {
 
     const firstHighlightRef = useRef(null);
 
-    const cardText = [
-        "Real-Time Weather",
-        "Data Analytics & ForeCasting",
-        "Smart Alerts & Automated Notifications",
-        "Interactive Dashboard & Reporting Tools",
-    ];
 
     const highlightText = (text, query) => {
         const stringText = String(text || "");
@@ -149,19 +142,13 @@ export default function Welcome() {
                             slidesPerView={1}
                         >
                             {banners.map((banner, index) => {
-                                let descriptionLines = [];
-
-                                if (typeof window !== "undefined") {
+                                // Parse description HTML to text for banners with gradient
+                                let descriptionText = '';
+                                if (banner.description && typeof window !== "undefined") {
                                     const parser = new DOMParser();
-                                    const doc = parser.parseFromString(
-                                        banner.description,
-                                        "text/html"
-                                    );
-                                    descriptionLines = Array.from(
-                                        doc.querySelectorAll("p")
-                                    )
-                                        .map((p) => p.textContent?.trim())
-                                        .filter(Boolean);
+                                    const doc = parser.parseFromString(banner.description, "text/html");
+                                    const p = doc.querySelector("p");
+                                    descriptionText = p?.textContent?.trim() || '';
                                 }
 
                                 return (
@@ -169,49 +156,52 @@ export default function Welcome() {
                                         <div className="relative w-full h-full lg:h-[90vh]">
                                             {/* Banner image */}
                                             <img
-                                                className="object-cover w-full h-full brightness-90"
+                                                className="object-cover w-full h-full"
                                                 src={banner.image}
                                                 alt={`Slide ${index + 1}`}
                                                 loading="lazy"
                                             />
 
-                                            {/* Banner text */}
-                                            <div className="absolute inset-0 flex flex-col items-start justify-center px-4 text-white top-[15%] md:top-15 md:items-start md:justify-start sm:px-8  md:w-3/4 xl:w-1/2">
-                                                {/* Title (line 0) */}
-                                                <div className="text-[12px] md:text-sm font-bold mb-2 text-black">
-                                                    {banner.title}
+                                            {/* Optional gradient overlay for text readability */}
+                                            {banner.show_gradient && (
+                                                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                                            )}
+
+                                            {/* Banner content overlay (only for banners with gradient) */}
+                                            {banner.show_gradient && (
+                                                <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-16 md:w-2/3 lg:w-1/2">
+                                                    {banner.title && (
+                                                        <h2 className="text-lg md:text-xl font-semibold text-white/90 mb-2 uppercase tracking-wide">
+                                                            {banner.title}
+                                                        </h2>
+                                                    )}
+                                                    {descriptionText && (
+                                                        <p className="text-white text-base md:text-lg leading-relaxed mb-6">
+                                                            {descriptionText}
+                                                        </p>
+                                                    )}
                                                 </div>
+                                            )}
 
-                                                {/* Description lines (line 1 & 2) */}
-                                                {descriptionLines
-                                                    .slice(0, 2)
-                                                    .map((line, i) => {
-                                                        let lineClass = "";
-
-                                                        if (i === 0)
-                                                            lineClass =
-                                                                "xl:text-[60px] lg:text-[40px] md:text-[2rem] font-bold mb-2 md:mb-[2rem] text-blue-700";
-                                                        else if (i === 1)
-                                                            lineClass =
-                                                                "xl:text-[60px] lg:text-[40px] sm:text-4xl md:text-[2rem] font-semibold text-blue-700";
-
-                                                        return (
-                                                            <div
-                                                                key={i}
-                                                                className={
-                                                                    lineClass
-                                                                }
-                                                            >
-                                                                {line}
-                                                            </div>
-                                                        );
-                                                    })}
-                                            </div>
-
-                                            {/* Floating BannerCards over image */}
-                                            <div className="absolute top-1/2 hidden md:top-[70%] lg:top-[80%] left-1/2 transform -translate-x-1/2 flex w-full h-1/2 md:h-screen md:grid-cols-1 md:w-[90%] md:block md:max-w-6xl">
-                                                <BannerCards cards={cardText} />
-                                            </div>
+                                            {/* CTA Buttons - positioned at bottom-left */}
+                                            {(banner.cta_primary_text || banner.cta_secondary_text) && (
+                                                <div className={`absolute bottom-20 left-8 md:left-16 flex flex-col sm:flex-row gap-4 ${!banner.show_gradient ? 'z-10' : ''}`}>
+                                                    {banner.cta_primary_text && (
+                                                        <Link href={banner.cta_primary_link || '#'}>
+                                                            <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition shadow-lg">
+                                                                {banner.cta_primary_text}
+                                                            </button>
+                                                        </Link>
+                                                    )}
+                                                    {banner.cta_secondary_text && (
+                                                        <Link href={banner.cta_secondary_link || '#'}>
+                                                            <button className="px-6 py-3 bg-white/90 text-blue-700 font-semibold rounded-lg hover:bg-white transition shadow-lg">
+                                                                {banner.cta_secondary_text}
+                                                            </button>
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     </SwiperSlide>
                                 );
@@ -580,7 +570,7 @@ export default function Welcome() {
                             news.length > 0 ? (
                                 news.map((item, index) => {
                                     const formattedDate = new Date(
-                                        item.created_at
+                                        item.date_implemented || item.created_at
                                     ).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "long",

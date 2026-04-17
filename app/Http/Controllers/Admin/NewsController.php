@@ -20,7 +20,7 @@ class NewsController extends Controller
 
     public function getNews()
     {
-        $news = News::orderBy('created_at', 'desc')->get();
+        $news = News::orderBy('date_implemented', 'desc')->get();
 
         return response()->json([
             'data' => $news

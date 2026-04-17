@@ -78,24 +78,16 @@ const partnerHeadingVariants = {
 };
 
 const partnerLogos = [
-    "4.png",
-    "15.png",
-    "17.png",
-    "18.png",
-    "21.png",
-    "25.png",
-    "26.png",
-    "29.png",
-    "44 1.png",
-    "4.png",
-    "15.png",
-    "17.png",
-    "18.png",
-    "21.png",
-    "25.png",
-    "26.png",
-    "29.png",
-    "44 1.png",
+    "mapua-logo.png",
+    "dost-logo.png",
+    "pagasa-logo.svg",
+    "pcieerd-logo.png",
+    "tapi-logo.png",
+    "mapua-logo.png",
+    "dost-logo.png",
+    "pagasa-logo.svg",
+    "pcieerd-logo.png",
+    "tapi-logo.png",
 ];
 
 const features = [
@@ -355,26 +347,30 @@ export default function AboutUs() {
 
                             {/* Other Founders */}
                             <div className="grid md:grid-cols-3 gap-[3rem] mb-[5rem] items-start w-full">
-                                {[2, 3, 4].map((num) => (
+                                {[
+                                    { id: 2, name: "Dr. Cris Edward Monjardin", role: "Chief Operating Officer" },
+                                    { id: 3, name: "Engr. Febus Reidj Cruz", role: "Chief Technology Officer" },
+                                    { id: 4, name: "Engr. Fibor Tan", role: "Water Resource Expert" },
+                                ].map((founder) => (
                                     <div
-                                        key={num}
+                                        key={founder.id}
                                         className="flex flex-col items-center space-y-6 text-center md:-space-y-[4rem]"
                                     >
                                         <img
-                                            src={`/images/About Us/founders/founder_${num}.png`}
+                                            src={`/images/About Us/founders/founder_${founder.id}.png`}
                                             className="w-full max-w-xs md:h-[600px] h-[300px] object-contain"
-                                            alt={`Founder ${num}`}
+                                            alt={`Founder ${founder.id}`}
                                         />
                                         <div className="w-full space-y-3">
                                             <div className="w-full text-2xl font-bold border-b-2">
                                                 {highlightText(
-                                                    "Febus Reidj Cruz",
+                                                    founder.name,
                                                     searchQuery
                                                 )}
                                             </div>
                                             <div className="text-blue-700">
                                                 {highlightText(
-                                                    "Founder",
+                                                    founder.role,
                                                     searchQuery
                                                 )}
                                             </div>

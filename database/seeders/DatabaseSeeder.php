@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'hello@rweb.solutions',
             'password' => Hash::make('*'),
         ]);
+
+        $this->call([
+            BannerSeeder::class,
+            NewsSeeder::class,
+            CaseStudySeeder::class,
+        ]);
     }
 }

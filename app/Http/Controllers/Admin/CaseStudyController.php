@@ -17,7 +17,7 @@ class CaseStudyController extends Controller
 
     public function getCaseStudy()
     {
-        $case_study = CaseStudy::orderBy('created_at', 'desc')->get();
+        $case_study = CaseStudy::orderBy('date_implemented', 'desc')->get();
 
         return response()->json([
             'data' => $case_study

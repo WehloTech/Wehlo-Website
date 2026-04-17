@@ -229,7 +229,7 @@ export default function Blogs() {
                                     {Array.isArray(filteredNews) &&
                                         filteredNews.map((item, index) => {
                                             const formattedDate = new Date(
-                                                item.created_at
+                                                item.date_implemented || item.created_at
                                             ).toLocaleDateString("en-US", {
                                                 year: "numeric",
                                                 month: "long",
@@ -353,7 +353,7 @@ export default function Blogs() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="p-4 mx-2">
+                                                        <div className="p-4 mx-2">
                                                             <Link
                                                                 href={`/cases_details/${item.id}`}
                                                             >
@@ -409,10 +409,11 @@ export default function Blogs() {
                                     activeTab === "news" ? news : caseStudies
                                 ) &&
                                     (activeTab === "news" ? news : caseStudies)
+                                        .sort((a, b) => new Date(b.date_implemented || b.created_at) - new Date(a.date_implemented || a.created_at))
                                         .slice(0, 3)
                                         .map((item, index) => {
                                             const formattedDate = new Date(
-                                                item.created_at || new Date()
+                                                item.date_implemented || item.created_at
                                             ).toLocaleDateString("en-US", {
                                                 year: "numeric",
                                                 month: "short",
@@ -427,7 +428,9 @@ export default function Blogs() {
                                                                 ? "blogs_details"
                                                                 : "cases_details"
                                                         }/${
-                                                            item.id
+                                                            activeTab === "news"
+                                                                ? item.slug
+                                                                : item.id
                                                         }?q=${encodeURIComponent(
                                                             searchTerm
                                                         )}`}

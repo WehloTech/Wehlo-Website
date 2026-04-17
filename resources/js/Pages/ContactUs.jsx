@@ -129,7 +129,7 @@ export default function ContactUs() {
                                             </span>
                                             <span className="text-sm text-blue-700">
                                                 {highlightText(
-                                                    "+63 912 345 6789",
+                                                    "(02) 8 7167089  / (02) 8 734 9206",
                                                     searchQuery
                                                 )}
                                             </span>
@@ -151,7 +151,7 @@ export default function ContactUs() {
                                             </span>
                                             <span className="text-sm text-blue-700">
                                                 {highlightText(
-                                                    "hello@wehlo.ph",
+                                                    "inquiries@wehlo.net",
                                                     searchQuery
                                                 )}
                                             </span>
@@ -173,7 +173,7 @@ export default function ContactUs() {
                                             </span>
                                             <span className="text-sm text-blue-700">
                                                 {highlightText(
-                                                    "Mon-Fri: 9AM-6PM",
+                                                    "Mon-Fri: 8AM-5PM",
                                                     searchQuery
                                                 )}
                                             </span>
@@ -195,12 +195,12 @@ export default function ContactUs() {
                                             </span>
                                             <span className="text-sm text-blue-700">
                                                 {highlightText(
-                                                    "123 Climate Tech Park,",
+                                                    "Unit A, 6th Floor  Salamin Building,",
                                                     searchQuery
                                                 )}
                                                 <br />
                                                 {highlightText(
-                                                    "Greenbelt City, Philippines",
+                                                    "197 Salcedo St., Legaspi Village, Makati City, Philippines",
                                                     searchQuery
                                                 )}
                                             </span>

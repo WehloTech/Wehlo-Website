@@ -14,6 +14,11 @@ class Banner extends Model
     protected $fillable = [
         'title',
         'description',
-        'image'
+        'image',
+        'cta_primary_text',
+        'cta_primary_link',
+        'cta_secondary_text',
+        'cta_secondary_link',
+        'show_gradient'
     ];
 }

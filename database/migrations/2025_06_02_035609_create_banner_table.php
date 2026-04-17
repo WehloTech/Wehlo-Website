@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->longText('description')->nullable();
+            $table->string('cta_primary_text')->nullable();
+            $table->string('cta_primary_link')->nullable();
+            $table->string('cta_secondary_text')->nullable();
+            $table->string('cta_secondary_link')->nullable();
+            $table->boolean('show_gradient')->default(false);
             $table->timestamps();
         });
     }
