@@ -34,7 +34,7 @@ export default function BlogsDetails({ news }) {
                                 </span>{" "}
                                 <strong>
                                     {new Date(
-                                        news.date_implemented || news.created_at
+                                        news.created_at
                                     ).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "short",
