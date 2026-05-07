@@ -150,7 +150,10 @@ class CaseStudySeeder extends Seeder
         ];
 
         foreach ($studies as $study) {
-            CaseStudy::create($study);
+            CaseStudy::firstOrCreate(
+                ['title' => $study['title']],
+                $study
+            );
         }
     }
 }

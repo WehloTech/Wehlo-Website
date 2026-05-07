@@ -23,7 +23,7 @@ class NewsSeeder extends Seeder
 
         $categoryModels = [];
         foreach ($categories as $catName) {
-            $categoryModels[$catName] = Category::create(['name' => $catName]);
+            $categoryModels[$catName] = Category::firstOrCreate(['name' => $catName]);
         }
 
         $posts = [
@@ -189,11 +189,14 @@ class NewsSeeder extends Seeder
                 $post['slug'] = Str::slug($post['title']);
             }
 
-            $news = News::create($post);
+            $news = News::firstOrCreate(
+                ['slug' => $post['slug']],
+                $post
+            );
 
             // Attach category
             if (isset($categoryModels[$categoryName])) {
-                $news->categories()->attach($categoryModels[$categoryName]->id);
+                $news->categories()->syncWithoutDetaching([$categoryModels[$categoryName]->id]);
             }
         }
     }
